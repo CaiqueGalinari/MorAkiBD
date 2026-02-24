@@ -193,6 +193,14 @@ function renderizarImoveis() {
         let isFav = meusFavoritos.includes(imovel.idMoradia);
         let iconeCoracao = isFav ? '<i class="ph-fill ph-heart" style="color: #a63a58;"></i>' : '<i class="ph ph-heart" style="color: #aaa;"></i>';
 
+        // Lógica para formatar o número de telefone (DDD) 99999-9999
+        let tel = imovel.telefoneDono || 'Não informado';
+        if (tel.length === 11) {
+            tel = `(${tel.substring(0,2)}) ${tel.substring(2,7)}-${tel.substring(7)}`;
+        } else if (tel.length === 10) {
+            tel = `(${tel.substring(0,2)}) ${tel.substring(2,6)}-${tel.substring(6)}`;
+        }
+
         let htmlFoto = imovel.fotoPrincipal
             ? `<img src="/moraki/${imovel.fotoPrincipal}" alt="Foto" style="width: 100%; height: 100%; object-fit: cover;">`
             : `<div style="width: 100%; height: 100%; background: #eee; display: flex; align-items: center; justify-content: center; color: #999;">Sem foto</div>`;
@@ -209,10 +217,12 @@ function renderizarImoveis() {
                             ${iconeCoracao}
                         </button>
                     </div>
-                    <div style="display: flex; align-items: center; gap: 20px; margin-top: 15px;">
+
+                    <div style="display: flex; align-items: center; gap: 20px; margin-top: 15px; flex-wrap: wrap;">
                         <span style="color: #a63a58; font-weight: bold; font-size: 1.2rem;">${valorFormatado}/mês</span>
                         <span style="color: #666; font-size: 0.95rem; display: flex; align-items: center; gap: 5px;"><i class="ph ph-calendar-blank"></i> ${imovel.tempoAluguel} meses</span>
-                        <span style="color: #666; font-size: 0.95rem; display: flex; align-items: center; gap: 5px;"><i class="ph ph-user"></i> Max. ${imovel.maxInquilino} inquilinos</span>
+                        <span style="color: #666; font-size: 0.95rem; display: flex; align-items: center; gap: 5px;"><i class="ph ph-user"></i> Max. ${imovel.maxInquilino} inq.</span>
+                        <span style="color: #25D366; font-weight: bold; font-size: 0.95rem; display: flex; align-items: center; gap: 5px;" title="Telefone do proprietário"><i class="ph ph-whatsapp-logo" style="font-size: 1.1rem;"></i> ${tel}</span>
                     </div>
                 </div>
                 <p style="color: #888; font-size: 0.95rem; margin: 0; display: flex; align-items: center; gap: 5px; margin-top: 10px;">
