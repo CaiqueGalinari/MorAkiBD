@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imóveis | MorAki</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo-nav">
+        <img src="../assets/logo.png" alt="Logo MorAki">
+        <span>MorAki</span>
+    </div>
+
+    <div class="user-nav" style="display: flex; align-items: center; gap: 18px;">
+
+        <a href="cadastro_imovel.html" style="color: white; text-decoration: none; font-size: 0.9rem; display: flex; align-items: center; gap: 5px; opacity: 0.75; transition: opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.75'" title="Cadastrar nova moradia">
+            <i class="ph ph-plus-circle" style="font-size: 1.15rem;"></i> Novo Imóvel
+        </a>
+
+        <a href="meus_imoveis.html" style="color: white; text-decoration: none; font-size: 0.9rem; display: flex; align-items: center; gap: 5px; opacity: 0.75; transition: opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.75'" title="Gerenciar meus anúncios">
+            <i class="ph ph-buildings" style="font-size: 1.15rem;"></i> Meus Imóveis
+        </a>
+
+        <div style="width: 1px; height: 18px; background-color: rgba(255, 255, 255, 0.3);"></div>
+
+        <a href="perfil.html" style="color: white; text-decoration: none; font-size: 0.9rem; font-weight: bold; display: flex; align-items: center; gap: 5px; transition: 0.2s;" onmouseover="this.style.color='#f0d0d8'" onmouseout="this.style.color='white'">
+            <i class="ph ph-user" style="font-size: 1.1rem;"></i> Meu Perfil
+        </a>
+
+        <span id="mensagem-ola" style="font-size: 0.9rem; color: #eee;">Olá, Usuario</span>
+        <button id="btn-sair" class="btn-logout" style="cursor: pointer; transition: 0.2s;">Sair</button>
+    </div>
+</header>
+
+    <main style="background-color: #a63a58; background-image: url('../assets/wpp_predios.png'); background-position: center bottom; background-size: cover; background-repeat: no-repeat; background-attachment: fixed; min-height: calc(100vh - 60px); padding-top: 40px; padding-bottom: 50px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; flex-direction: column; align-items: center;">
+
+        <div style="width: 100%; max-width: 950px; color: white; text-align: center; padding: 0 20px; box-sizing: border-box;">
+
+            <h1 style="font-size: 2.4rem; margin: 0 0 10px 0; font-weight: 700; text-shadow: 2px 2px 5px rgba(0,0,0,0.4);">Encontre seu Imóvel Ideal</h1>
+            <p style="font-size: 1.15rem; margin: 0 0 35px 0; text-shadow: 1px 1px 4px rgba(0,0,0,0.4);">Busque moradias que atendam às suas necessidades:</p>
+
+            <div style="background: white; border-radius: 20px; padding: 15px 25px; display: flex; align-items: center; justify-content: space-between; gap: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.25); color: #333; text-align: left; flex-wrap: wrap; margin-bottom: 40px;">
+
+                <div style="flex: 1; min-width: 120px; border-right: 1px solid #eaeaea; padding-right: 15px;">
+                    <strong style="font-size: 0.75rem; color: #888; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 5px;">Cidades</strong>
+                    <select id="filtro-cidade" style="width: 100%; border: none; background: transparent; padding: 0; outline: none; font-size: 0.95rem; color: #222; cursor: pointer;">
+                        <option value="">Todas as cidades</option>
+                    </select>
+                </div>
+
+                <div style="flex: 1; min-width: 120px; border-right: 1px solid #eaeaea; padding-right: 15px;">
+                    <strong style="font-size: 0.75rem; color: #888; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 5px;">Bairros</strong>
+                    <select id="filtro-bairro" style="width: 100%; border: none; background: transparent; padding: 0; outline: none; font-size: 0.95rem; color: #222; cursor: pointer;">
+                        <option value="">Selecione a cidade...</option>
+                    </select>
+                </div>
+
+                <div style="flex: 1; min-width: 120px; border-right: 1px solid #eaeaea; padding-right: 15px;">
+                    <strong style="font-size: 0.75rem; color: #888; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 5px;">Tipo de Imóvel</strong>
+                    <select id="filtro-tipo" style="width: 100%; border: none; background: transparent; padding: 0; outline: none; font-size: 0.95rem; color: #222; cursor: pointer;">
+                        <option value="">Todos os Tipos</option>
+                        <option value="Apartamento">Apartamento</option>
+                        <option value="Casa">Casa</option>
+                        <option value="Kitnet">Kitnet</option>
+                        <option value="Quarto">Quarto</option>
+                        <option value="Republica">República</option>
+                    </select>
+                </div>
+
+                <div style="flex: 1.5; min-width: 130px; border-right: 1px solid #eaeaea; padding-right: 15px;">
+                    <strong id="label-valor" style="font-size: 0.75rem; color: #888; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 5px;">Até R$ 3.000</strong>
+                    <input type="range" id="filtro-valor" min="100" max="3000" step="100" value="3000" style="width: 100%; cursor: pointer; accent-color: #a63a58;">
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 8px; align-items: flex-start; min-width: 110px;">
+                    <select id="ordem-valor" style="border: none; background: transparent; font-size: 0.85rem; color: #555; outline: none; cursor: pointer; padding: 0;">
+                        <option value="">Ordenar por...</option>
+                        <option value="menor">Menor Preço</option>
+                        <option value="maior">Maior Preço</option>
+                    </select>
+                    <label style="font-size: 0.9rem; font-weight: 700; color: #a63a58; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+                        <input type="checkbox" id="filtro-favoritos" style="margin: 0; accent-color: #a63a58; width: 16px; height: 16px;"> Favoritos ❤️
+                    </label>
+                </div>
+
+            </div>
+
+            <div id="lista-imoveis" style="display: flex; flex-direction: column; gap: 20px; text-align: left;">
+            </div>
+
+            <div id="area-paginacao" style="display: flex; justify-content: center; align-items: center; gap: 15px; margin-top: 50px;">
+                <button onclick="mudarPagina(-1)" style="background: rgba(0,0,0,0.5); backdrop-filter: blur(5px); color: white; border: 1px solid rgba(255,255,255,0.2); padding: 10px 25px; border-radius: 20px; cursor: pointer; font-weight: bold; font-size: 0.95rem; transition: 0.2s;"> < Anterior </button>
+                <span id="texto-paginacao" style="background: white; color: #333; padding: 10px 25px; border-radius: 20px; font-weight: bold; font-size: 0.95rem; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">1 de 3</span>
+                <button onclick="mudarPagina(1)" style="background: rgba(0,0,0,0.5); backdrop-filter: blur(5px); color: white; border: 1px solid rgba(255,255,255,0.2); padding: 10px 25px; border-radius: 20px; cursor: pointer; font-weight: bold; font-size: 0.95rem; transition: 0.2s;"> Próximo > </button>
+            </div>
+
+        </div>
+    </main>
+
+    <script src = "../js/listagem.js"></script>
+
+</body>
+</html>

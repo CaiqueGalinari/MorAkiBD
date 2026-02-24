@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meus Imóveis | MorAki</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+
+    <main>
+        <section class="modal-largo modal-imoveis"> 
+            
+            <div class="header-imoveis">
+                <a href="listagem.html" class="btn-voltar"><i class="ph ph-caret-circle-left"></i></a>
+                <h2>Meus Imóveis</h2>
+            </div>
+
+            <div class="lista-cards" id="container-imoveis">
+                
+                <div class="card-imovel">
+                    <img src="../assets/rep1.png" alt="Foto do Imóvel" class="card-img">
+                    
+                    <div class="card-info">
+                        <h3>República mobiliada próxima ao metrô</h3>
+                        
+                        <div class="card-detalhes-linha">
+                            <span class="preco">R$ 1.200/mês</span>
+                            <span class="info-extra"><i class="ph ph-calendar-blank"></i> 6 meses</span>
+                            <span class="info-extra"><i class="ph ph-user"></i> Max. 5 inquilinos</span>
+                        </div>
+                        
+                        <p class="endereco"><i class="ph ph-map-pin"></i> Rua das Flores, 123, Centro</p>
+                    </div>
+
+                    <div class="card-acoes">
+                        <button class="btn-acao info" title="Ver Informações"><i class="ph-fill ph-info"></i></button>
+                        <button class="btn-acao deletar" title="Excluir"><i class="ph ph-trash"></i></button>
+                        <button class="btn-acao editar" title="Editar"><i class="ph-fill ph-pencil-simple"></i></button>
+                    </div>
+                </div>
+                </div>
+
+            <div class="rodape-imoveis">
+                <div class="paginacao">
+                    <button id="btn-anterior" class="btn-pag"><i class="ph ph-caret-left"></i> Anterior</button>
+                    <span id="info-paginacao" class="pagina-atual">1 de 3</span>
+                    <button id="btn-proximo" class="btn-pag">Próximo <i class="ph ph-caret-right"></i></button>
+                </div>
+                
+                <div class="botoes-acao-rodape" style="display: flex; gap: 15px; align-items: center;">
+                    <a href="listagem.html" class="btn-cancelar">Voltar</a>
+                    <a href="cadastro_imovel.html" class="btn-cadastrar-imovel">Cadastrar</a>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <script src="../js/meus_imoveis.js"></script>
+</body>
+</html>

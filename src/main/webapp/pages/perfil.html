@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Perfil | MorAki</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo-nav">
+        <img src="../assets/logo.png" alt="Logo MorAki">
+        <span>MorAki</span>
+    </div>
+    <div class="user-nav">
+        <a href="listagem.html" style="color: white; text-decoration: none; font-weight: bold;">Voltar aos Imóveis</a>
+    </div>
+</header>
+
+<main class="dashboard" style="display: flex; justify-content: center;">
+    <section class="modal-largo" style="max-width: 600px;">
+        <h2 style="margin-bottom: 5px;">Meu Perfil</h2>
+        <p style="margin-bottom: 30px; color: #666;">Atualize seus dados pessoais e de contato</p>
+
+        <form id="form-perfil">
+            <div class="linha-inputs">
+                <div class="campo">
+                    <label for="nome">Nome Completo</label>
+                    <input type="text" id="nome" required>
+                </div>
+            </div>
+
+            <div class="linha-inputs">
+                <div class="campo">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" required>
+                </div>
+            </div>
+
+            <div class="linha-inputs">
+                <div class="campo">
+                    <label for="descricao">Sobre mim (Descrição)</label>
+                    <textarea id="descricao" rows="4" style="width: 100%; background: #f0f0f0; border: none; border-radius: 5px; padding: 10px;"></textarea>
+                </div>
+            </div>
+
+            <div style="background: #fdf5f7; padding: 15px; border-radius: 8px; border: 1px solid #ecc9d3; margin-bottom: 20px;">
+                <h4 style="color: #a63a58; margin-bottom: 10px; font-size: 0.95rem;">Alterar Senha (Opcional)</h4>
+                <div class="linha-inputs" style="margin-bottom: 0;">
+                    <div class="campo">
+                        <label for="nova-senha">Nova Senha</label>
+                        <input type="password" id="nova-senha" placeholder="Deixe em branco para manter a atual">
+                    </div>
+                    <div class="campo">
+                        <label for="security-key">Chave de Segurança</label>
+                        <input type="text" id="security-key" placeholder="Ex: SECKEY01">
+                    </div>
+                </div>
+            </div>
+
+            <div class="botoes-rodape">
+                <button type="submit" class="btn-cadastrar-imovel">Salvar Alterações</button>
+            </div>
+        </form>
+    </section>
+</main>
+
+<script src="../js/perfil.js"></script>
+</body>
+</html>
