@@ -25,7 +25,6 @@ public class SessaoServlet extends HttpServlet {
             resp.setCharacterEncoding("UTF-8");
             resp.getWriter().write(new Gson().toJson(usuario));
         } else {
-            // Se ninguém estiver logado, devolve erro 401 (Não Autorizado)
             resp.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         }
     }

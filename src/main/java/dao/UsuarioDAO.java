@@ -19,27 +19,24 @@ public class UsuarioDAO {
             conn = Conexao.getConexao();
             ps = conn.prepareStatement(sql);
 
-            // Preenche os ? do SQL com os dados do objeto usuario
             ps.setString(1, usuario.getNome());
             ps.setString(2, usuario.getDescricao());
             ps.setString(3, usuario.getEmail());
             ps.setString(4, usuario.getSenha());
             ps.setString(5, usuario.getSecurityKey());
 
-            ps.execute(); // Executa o INSERT
+            ps.execute();
             System.out.println("Usuário gravado com sucesso!");
 
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException("Erro ao cadastrar usuário: " + e.getMessage());
         } finally {
-            // Fechando conexões p não travar o BD
             try { if (ps != null) ps.close(); } catch (Exception e) {}
             try { if (conn != null) conn.close(); } catch (Exception e) {}
         }
     }
 
-    // Recebe um boolean avisando se a senha deve ser alterada no banco
     public void atualizar(Usuario usuario, boolean alterarSenha) {
         String sql;
 

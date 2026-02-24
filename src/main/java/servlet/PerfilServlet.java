@@ -24,7 +24,6 @@ public class PerfilServlet extends HttpServlet {
 
         Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
 
-        // Atualiza apenas os dados básicos primeiro
         usuario.setNome(req.getParameter("nome"));
         usuario.setEmail(req.getParameter("email"));
         usuario.setDescricao(req.getParameter("descricao"));
@@ -36,15 +35,13 @@ public class PerfilServlet extends HttpServlet {
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
 
-        // Se o usuário digitou algo no campo de Nova Senha
         if (novaSenha != null && !novaSenha.isEmpty()) {
-            // Verifica se a chave de segurança confere
             if (usuario.getSecurityKey() != null && usuario.getSecurityKey().equals(securityKey)) {
                 usuario.setSenha(novaSenha);
                 alterarSenha = true;
             } else {
                 resp.getWriter().write("{\"status\":\"erro\",\"mensagem\":\"Chave de Segurança (Security Key) incorreta! A sua senha não foi alterada.\"}");
-                return; // Para o código aqui e não atualiza nada no banco
+                return;
             }
         }
 

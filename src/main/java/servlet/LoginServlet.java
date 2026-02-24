@@ -28,7 +28,6 @@ public class LoginServlet extends HttpServlet {
         Map<String, Object> resposta = new HashMap<>();
 
         if (usuario != null) {
-            // Cria a sessão e salva o objeto usuário inteiro nela
             HttpSession session = req.getSession();
             session.setAttribute("usuarioLogado", usuario);
 

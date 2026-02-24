@@ -20,7 +20,6 @@ document.addEventListener('DOMContentLoaded', function() {
         .catch(erro => console.error('Erro ao carregar meus imóveis:', erro));
 });
 
-// Dá vida aos botões originais do seu HTML
 function configurarBotoesPaginacao() {
     const btnAnterior = document.getElementById('btn-anterior');
     const btnProximo = document.getElementById('btn-proximo');
@@ -52,21 +51,17 @@ function renderizarImoveis() {
 
     container.innerHTML = '';
 
-    // Se não tiver imóveis, mostra a mensagem e esconde a barra de paginação
     if (meusImoveis.length === 0) {
         container.innerHTML = '<p class="aviso-vazio">Você ainda não possui imóveis cadastrados.</p>';
         if (divPaginacao) divPaginacao.style.display = 'none';
         return;
     }
 
-    // Se tiver imóveis, garante que a barra de paginação aparece
     if (divPaginacao) divPaginacao.style.display = 'flex';
 
-    // Atualiza o texto "1 de 3"
     const totalPaginas = Math.ceil(meusImoveis.length / itensPorPagina);
     if (infoPaginacao) infoPaginacao.innerText = `${paginaAtual} de ${totalPaginas}`;
 
-    // Corta a lista para exibir apenas 3 itens baseados na página atual
     const inicio = (paginaAtual - 1) * itensPorPagina;
     const fim = inicio + itensPorPagina;
     const imoveisPagina = meusImoveis.slice(inicio, fim);
@@ -78,12 +73,10 @@ function renderizarImoveis() {
 
         let valorFormatado = imovel.valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
-        // Adiciona a foto real mantendo a sua classe original "card-img", ou mostra o "Sem foto"
         let htmlFoto = imovel.fotoPrincipal
             ? `<img src="/moraki/${imovel.fotoPrincipal}" alt="Foto do Imóvel" class="card-img" style="width: 150px; height: 100px; object-fit: cover;">`
             : `<div class="sem-foto" style="width: 150px; height: 100px; display: flex; align-items: center; justify-content: center;">Sem foto</div>`;
 
-        // O SEU CARD ORIGINAL, INTACTO
         card.innerHTML = `
             ${htmlFoto}
             <div class="card-info">
@@ -106,7 +99,6 @@ function renderizarImoveis() {
     }
 }
 
-// SUAS FUNÇÕES ORIGINAIS
 function deletarImovel(id) {
     if (confirm("Tem certeza que deseja excluir este imóvel de forma permanente?")) {
         fetch('/moraki/moradias?id=' + id, {

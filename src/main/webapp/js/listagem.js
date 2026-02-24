@@ -2,7 +2,6 @@ let imoveisGlobais = [];
 let imoveisFiltrados = [];
 let meusFavoritos = [];
 
-// Sistema de Paginação
 let paginaAtual = 1;
 const itensPorPagina = 3;
 
@@ -46,7 +45,6 @@ document.addEventListener('DOMContentLoaded', async function() {
         renderizarImoveis();
     } catch (erro) { console.error(erro); }
 
-    // EVENTOS DE BUSCA AUTOMÁTICA
     const filtroValor = document.getElementById('filtro-valor');
     const labelValor = document.getElementById('label-valor');
     if (filtroValor && labelValor) {
@@ -61,7 +59,6 @@ document.addEventListener('DOMContentLoaded', async function() {
     document.getElementById('ordem-valor')?.addEventListener('change', aplicarFiltros);
     document.getElementById('filtro-favoritos')?.addEventListener('change', aplicarFiltros);
 
-    // Gatilhos para os novos menus dropdown
     document.getElementById('filtro-cidade')?.addEventListener('change', () => {
         renderizarFiltroBairros();
         aplicarFiltros();
@@ -69,13 +66,12 @@ document.addEventListener('DOMContentLoaded', async function() {
     document.getElementById('filtro-bairro')?.addEventListener('change', aplicarFiltros);
 });
 
-// ===================== RENDERIZAÇÃO DOS MENUS SUSPENSOS =====================
 function renderizarFiltroCidades() {
     const select = document.getElementById('filtro-cidade');
     if(!select) return;
 
     let cidadesUnicas = [...new Set(imoveisGlobais.map(m => m.cidadeStr))].sort();
-    let cidadeAtual = select.value; // Guarda se algo já estava selecionado
+    let cidadeAtual = select.value;
 
     select.innerHTML = '<option value="">Todas as cidades</option>';
 
@@ -115,7 +111,6 @@ function renderizarFiltroBairros() {
     });
 }
 
-// ===================== BUSCA NO SQL E PAGINAÇÃO =====================
 function aplicarFiltros() {
     const cidade = document.getElementById('filtro-cidade')?.value || '';
     const bairro = document.getElementById('filtro-bairro')?.value || '';
@@ -130,7 +125,6 @@ function aplicarFiltros() {
     if (ordem) params.append('ordem', ordem);
     if (apenasFav) params.append('apenasFav', 'true');
 
-    // Enviando no formato que o Java espera
     if (cidade) params.append('cidades', cidade);
     if (bairro) params.append('bairros', bairro);
 
@@ -158,7 +152,6 @@ function mudarPagina(direcao) {
     renderizarImoveis();
 }
 
-// ===================== RENDERIZAÇÃO DO CARD HORIZONTAL =====================
 function renderizarImoveis() {
     const container = document.getElementById('lista-imoveis');
     const areaPaginacao = document.getElementById('area-paginacao');
@@ -193,7 +186,6 @@ function renderizarImoveis() {
         let isFav = meusFavoritos.includes(imovel.idMoradia);
         let iconeCoracao = isFav ? '<i class="ph-fill ph-heart" style="color: #a63a58;"></i>' : '<i class="ph ph-heart" style="color: #aaa;"></i>';
 
-        // Lógica para formatar o número de telefone (DDD) 99999-9999
         let tel = imovel.telefoneDono || 'Não informado';
         if (tel.length === 11) {
             tel = `(${tel.substring(0,2)}) ${tel.substring(2,7)}-${tel.substring(7)}`;
@@ -234,7 +226,6 @@ function renderizarImoveis() {
     });
 }
 
-// ===================== FAVORITOS =====================
 function toggleFavorito(idMoradia, botaoHtml) {
     const isFav = meusFavoritos.includes(idMoradia);
     const acao = isFav ? "remover" : "adicionar";

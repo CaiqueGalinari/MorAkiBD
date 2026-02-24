@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Verifica se a URL contém um ID (ex: cadastro_imovel.html?id=5)
     const urlParams = new URLSearchParams(window.location.search);
     const idMoradia = urlParams.get('id');
 
@@ -7,7 +6,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelector('h2').innerText = "Editar Imóvel";
         document.querySelector('.btn-cadastrar').innerText = "Atualizar";
 
-        // Busca os dados antigos do banco para preencher a tela
         fetch('/moraki/moradias?id=' + idMoradia)
             .then(response => response.json())
             .then(imovel => {
@@ -35,11 +33,9 @@ document.addEventListener('DOMContentLoaded', function() {
             .catch(erro => console.error('Erro ao buscar imóvel:', erro));
     }
 
-    // Ação do botão de salvar
     document.querySelector('form').addEventListener('submit', function(event) {
         event.preventDefault();
 
-        // 1. LÊ O ENDEREÇO
         const complementoRaw = document.getElementById('complemento') ? document.getElementById('complemento').value : '';
         const complemento = complementoRaw.trim() !== '' ? complementoRaw : 'Sem complemento';
         const numero = document.getElementById('numero').value;
@@ -50,7 +46,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const cep = document.getElementById('cep').value;
         const endereco = `${complemento}, ${numero}, ${rua}, ${bairro}, ${cidade}, ${uf}, ${cep}`;
 
-        // 2. LÊ OS OUTROS CAMPOS DA TELA (Isso era o que estava faltando!)
         const tipo = document.getElementById('tipo').value;
         const tempoAluguel = document.getElementById('tempo').value;
         const valor = document.getElementById('valor').value;
@@ -59,7 +54,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const telefoneDono = document.getElementById('telefone').value;
         const descricao = document.getElementById('descricao').value;
 
-        // 3. MONTA O PACOTE DE DADOS PARA O JAVA
         const formData = new FormData();
 
         if (idMoradia) {
@@ -76,13 +70,11 @@ document.addEventListener('DOMContentLoaded', function() {
         formData.append('valor', valor);
         formData.append('descricao', descricao);
 
-        // Adicionamos a FOTOGRAFIA física ao pacote de envio
         const inputFoto = document.getElementById('foto');
         if (inputFoto.files.length > 0) {
             formData.append('foto', inputFoto.files[0]);
         }
 
-        // 4. ENVIA PARA O SERVIDOR
         fetch('/moraki/moradias', {
             method: 'POST',
             body: formData
@@ -95,8 +87,8 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(data => {
             if (data.status === 'ok') {
-                alert(data.mensagem); // Avisa que deu tudo certo!
-                window.location.href = 'meus_imoveis.html'; // Redireciona para os Meus Imóveis
+                alert(data.mensagem);
+                window.location.href = 'meus_imoveis.html';
             } else {
                 alert('Erro: ' + data.mensagem);
             }

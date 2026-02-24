@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', function() {
             event.preventDefault();
 
             const formData = new URLSearchParams();
-            // Certifique-se de que os IDs no seu index.html são 'email' e 'senha'
             formData.append('email', document.getElementById('email').value);
             formData.append('senha', document.getElementById('senha').value);
 
@@ -20,7 +19,6 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(response => response.json())
             .then(data => {
                 if (data.status === 'ok') {
-                    // Se o login der certo, envia para a tela de listagem
                     window.location.href = 'pages/listagem.html';
                 } else {
                     alert('Erro: ' + data.mensagem);

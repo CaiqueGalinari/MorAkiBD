@@ -16,7 +16,7 @@ public class LogoutServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
         if (session != null) {
-            session.invalidate(); // Apaga a memória do usuário logado
+            session.invalidate();
         }
 
         resp.setContentType("application/json");

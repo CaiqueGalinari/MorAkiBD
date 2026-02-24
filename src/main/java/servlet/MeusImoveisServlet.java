@@ -28,7 +28,6 @@ public class MeusImoveisServlet extends HttpServlet {
         Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
         MoradiaDAO dao = new MoradiaDAO();
 
-        // Usa a query SQL externalizada para buscar apenas os imóveis deste usuário
         List<Moradia> meusImoveis = dao.listarPorUsuario(usuario.getIdUsuario());
 
         resp.setContentType("application/json");

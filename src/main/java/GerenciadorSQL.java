@@ -9,7 +9,6 @@ import java.util.Map;
 public class GerenciadorSQL {
     private static final Map<String, String> queries = new HashMap<>();
 
-    // O bloco estático roda automaticamente assim que o sistema inicia
     static {
         carregarQueries();
     }
@@ -28,20 +27,17 @@ public class GerenciadorSQL {
             while ((linha = reader.readLine()) != null) {
                 linha = linha.trim();
 
-                // Se achou uma tag nossa, ex: -- [LISTAR_TODAS_MORADIAS]
                 if (linha.startsWith("-- [") && linha.endsWith("]")) {
                     if (nomeQueryAtual != null) {
                         queries.put(nomeQueryAtual, sqlAtual.toString().trim());
-                        sqlAtual.setLength(0); // Limpa para a próxima query
+                        sqlAtual.setLength(0);
                     }
                     nomeQueryAtual = linha.substring(4, linha.length() - 1);
                 }
-                // Se for linha de SQL normal (ignora comentários comuns começando com --)
                 else if (!linha.isEmpty() && !linha.startsWith("--")) {
                     sqlAtual.append(linha).append(" ");
                 }
             }
-            // Salva a última query lida
             if (nomeQueryAtual != null) {
                 queries.put(nomeQueryAtual, sqlAtual.toString().trim());
             }

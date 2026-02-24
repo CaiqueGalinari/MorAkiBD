@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', async function() {
             document.getElementById('nome').value = usuario.nome;
             document.getElementById('email').value = usuario.email;
             document.getElementById('descricao').value = usuario.descricao || '';
-            // A senha NÃO é preenchida por motivos de segurança
         } else {
             alert("Você precisa fazer login!");
             window.location.href = '../index.html';
@@ -21,7 +20,6 @@ document.addEventListener('DOMContentLoaded', async function() {
         const novaSenha = document.getElementById('nova-senha').value;
         const securityKey = document.getElementById('security-key').value;
 
-        // Trava de UX: Se preencheu a senha, precisa da chave
         if (novaSenha && !securityKey) {
             alert("Para alterar a sua senha, você precisa informar a sua Chave de Segurança!");
             document.getElementById('security-key').focus();

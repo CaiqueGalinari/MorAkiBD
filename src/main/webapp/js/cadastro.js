@@ -14,7 +14,6 @@ document.querySelector('form').addEventListener('submit', function(event) {
     formData.append('email', document.getElementById('email').value);
     formData.append('senha', senha);
 
-    // O caminho '/MorAki/usuarios' deve corresponder ao nome do seu projeto no servidor
     fetch('/moraki/usuarios', {
         method: 'POST',
         headers: {

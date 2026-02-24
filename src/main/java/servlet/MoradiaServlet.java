@@ -33,14 +33,12 @@ public class MoradiaServlet extends HttpServlet {
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
 
-        // Se for edição de 1 imóvel
         if (idParam != null && !idParam.isEmpty()) {
             dto.Moradia m = dao.buscarPorId(Integer.parseInt(idParam));
             resp.getWriter().write(new Gson().toJson(m));
             return;
         }
 
-        // Se for uma busca com filtros
         String[] cidades = req.getParameterValues("cidades");
         String[] bairros = req.getParameterValues("bairros");
         String tipo = req.getParameter("tipo");
@@ -48,7 +46,6 @@ public class MoradiaServlet extends HttpServlet {
         String ordem = req.getParameter("ordem");
         String apenasFavStr = req.getParameter("apenasFav");
 
-        // Se não tiver filtros preenchidos, faz a busca padrão (valor limite alto)
         double valorMax = (valorMaxStr != null && !valorMaxStr.isEmpty()) ? Double.parseDouble(valorMaxStr) : 99999.0;
         boolean apenasFav = "true".equals(apenasFavStr);
 
@@ -59,10 +56,9 @@ public class MoradiaServlet extends HttpServlet {
             idUsuarioLogado = u.getIdUsuario();
         }
 
-        // Verifica se é um pedido simples (sem filtros) ou uma busca avançada
         List<dto.Moradia> moradias;
         if (cidades == null && bairros == null && (tipo == null || tipo.isEmpty()) && valorMaxStr == null && ordem == null && !apenasFav) {
-            moradias = dao.listarTodas(); // O método original limpo
+            moradias = dao.listarTodas();
         } else {
             moradias = dao.buscarComFiltros(cidades, bairros, tipo, valorMax, ordem, apenasFav, idUsuarioLogado);
         }
